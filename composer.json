@@ -1,7 +1,6 @@
 {
   "name": "ctfang/id-to-code",
   "type": "library",
-  "version": "v0.0.1",
   "keywords": [
     "php",
     "uuid",
