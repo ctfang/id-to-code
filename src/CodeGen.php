@@ -28,7 +28,7 @@ class CodeGen
             $config['len'] = $this->getCodeLenInt();
         }
 
-        // 再来十份数字模板
+        // 再来16份数字模板
         $config['num'] = $this->getNumMapping();
         $config['mode'] = $mode;
         $config['modeLen'] = $modeLen;
@@ -37,13 +37,13 @@ class CodeGen
     }
 
     /**
-     * 生成随机的数字映射,十份
+     * 生成随机的数字映射,16份
      * @return array
      */
     private function getNumMapping(): array
     {
         $strLenArr = [];
-        for ($j = 0; $j <= 9; $j++) {
+        for ($j = 0; $j <= 20; $j++) {
             $strArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
             $temp = [];
             for ($i = 0; $i <= 9; $i++) {
@@ -58,14 +58,14 @@ class CodeGen
     }
 
     /**
-     * 抽取长度,根据个位数选择长度模板,需要十份模板
+     * 抽取长度,根据个位数选择长度模板,需要16份模板
      * @param $len
      * @return array
      */
     private function getCodeLen(): array
     {
         $strLenArr = [];
-        for ($j = 0; $j <= 9; $j++) {
+        for ($j = 0; $j <= 20; $j++) {
             $strArr = $this->getStringArr();
             $temp = [];
             for ($i = 0; $i < 26; $i++) {
@@ -88,7 +88,7 @@ class CodeGen
     private function getCodeLenInt(): array
     {
         $strLenArr = [];
-        for ($j = 0; $j <= 9; $j++) {
+        for ($j = 0; $j <= 20; $j++) {
             $strArr = [];
             while (count($strArr)<26){
                 $int = rand(10,99);
