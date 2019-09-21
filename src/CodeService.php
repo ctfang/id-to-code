@@ -28,7 +28,7 @@ class CodeService
     public function __construct(string $strOrFile = null)
     {
         if (!$strOrFile) {
-            $arr = json_decode(__DIR__.'/str.config.json', true);
+            $arr = json_decode(file_get_contents(__DIR__.'/str.config.json'), true);
         } elseif (file_exists($strOrFile)) {
             $strOrFile = file_get_contents($strOrFile);
             $arr = json_decode($strOrFile, true);
