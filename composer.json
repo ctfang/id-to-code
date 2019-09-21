@@ -1,0 +1,30 @@
+{
+  "name": "ctfang/id-to-code",
+  "type": "library",
+  "version": "v0.0.1",
+  "keywords": [
+    "php",
+    "uuid",
+    "id",
+    "code"
+  ],
+  "description": "id to code",
+  "license": "Apache-2.0",
+  "authors" : [
+    {
+      "name": "ctfang",
+      "email": "2206582181@qq.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "swlib/saber": "*"
+  },
+  "autoload": {
+    "classmap": [
+    ],
+    "psr-4": {
+      "IdCode\\": "src/"
+    }
+  }
+}
