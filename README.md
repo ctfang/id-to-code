@@ -51,6 +51,7 @@ use IdCode\CodeService;
 $code = new CodeService('int.config.json');
 
 $ok = true;
+// 加密解密一亿次
 for ($int=0;$int<100000000;$int++){
     $base = $int;
     $str = $code->toString($int); 
