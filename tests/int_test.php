@@ -13,7 +13,7 @@ if ( !file_exists('int.config.json') ){
 $code = new CodeService('int.config.json');
 
 $ok = true;
-for ($int=0;$int<100000000;$int++){
+for ($int=0;$int<100;$int++){
     $base = $int;
     $str = $code->toString($int);
     $newInt = $code->toInt($str);

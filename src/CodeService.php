@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace IdCode;
@@ -57,10 +57,10 @@ class CodeService
      */
     public function toInt(string $str): int
     {
-        $end = substr($str, -1);
+        $end = (int)substr($str, -1);
 
         if ($this->mode == self::chrModel) {
-            $len = $this->strToLen($this->mapToNum($end, 0), $str{0});
+            $len = $this->strToLen($this->mapToNum($end, 0), ($str{0}));
         } else {
             $len = $this->strToLen($this->mapToNum($end, 0), substr($str,0,2));
         }
@@ -70,7 +70,7 @@ class CodeService
         $newStr = "";
         $j = $len - 1;
         for ($i = 0; $i < $len; $i++) {
-            $newStr .= $this->mapToNum($strNum{$i}, $j);
+            $newStr .= $this->mapToNum((int)($strNum{$i}), $j);
             $j--;
         }
 
@@ -86,7 +86,7 @@ class CodeService
     {
         $str = (string) $id;
         $len = strlen($str);
-        $end = $str{$len - 1};
+        $end = (int)($str{$len - 1});
 
         if ($this->mode == self::chrModel) {
             $lenStr = $this->lenToStr($len, $end);
@@ -108,7 +108,7 @@ class CodeService
         $newStr = "";
         $j = 0;
         for ($i = ($len - 1); $i >= 0; $i--) {
-            $newStr = $this->numToMap($str{$i}, $j).$newStr;
+            $newStr = $this->numToMap((int)($str{$i}), $j).$newStr;
             $j++;
         }
 
@@ -145,7 +145,7 @@ class CodeService
      */
     public function lenToStr(int $len, int $salt): string
     {
-        return $this->lenTemplate[$salt][$len];
+        return (string)$this->lenTemplate[$salt][$len];
     }
 
     /**

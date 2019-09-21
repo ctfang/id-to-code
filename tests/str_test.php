@@ -12,5 +12,17 @@ if ( !file_exists('str.config.json') ){
 
 $code = new CodeService('str.config.json');
 
-echo $code->toString(12);
-echo $code->toString(1);
+$ok = true;
+for ($int=0;$int<1000;$int++){
+    $base = $int;
+    $str = $code->toString($int);
+    $newInt = $code->toInt($str);
+
+    if ($base != $newInt){
+        $ok = false;
+        break;
+    }
+}
+if ($ok){
+    var_dump("加密 和 解密正常");
+};
