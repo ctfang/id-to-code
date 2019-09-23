@@ -35,11 +35,12 @@ class CodeGen
                 $this->str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 $config['len'] = [];
                 $config['num'] = $this->getChrMapping();
-
-                echo "纯数字无长度位,minLen 不生效; \n";
+                if ( $minLen ){
+                    echo "info : 纯数字无长度位,minLen 不生效; \n";
+                }
                 break;
         }
-
+        echo "生成成功; \n";
         $config['mode'] = $mode;
         $config['modeLen'] = $modeLen;
         $config['minLen'] = $minLen;
