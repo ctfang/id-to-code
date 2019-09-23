@@ -19,17 +19,27 @@ class CodeGen
      * @param  int  $modeLen  模式下的长度位, mode =2 有$modeLen位数字标志长度 | mode =1 首字母是长度,剩余补全字母
      * @return string
      */
-    public function genKey(int $minLen = 6, $mode = CodeService::chrModel, $modeLen = 2)
+    public function genKey(int $minLen = 6, $mode = CodeConfig::chrModel, $modeLen = 2)
     {
         // 长度字母模板
-        if( $mode==CodeService::chrModel){
-            $config['len'] = $this->getCodeLen();
-        }else{
-            $config['len'] = $this->getCodeLenInt();
+        switch ($mode){
+            case CodeConfig::chrModel:
+                $config['len'] = $this->getCodeLen();
+                $config['num'] = $this->getNumMapping();
+                break;
+            case CodeConfig::numMode:
+                $config['len'] = $this->getCodeLenInt();
+                $config['num'] = $this->getNumMapping();
+                break;
+            case CodeConfig::notMode:
+                $this->str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                $config['len'] = [];
+                $config['num'] = $this->getChrMapping();
+
+                echo "纯数字无长度位,minLen 不生效; \n";
+                break;
         }
 
-        // 再来16份数字模板
-        $config['num'] = $this->getNumMapping();
         $config['mode'] = $mode;
         $config['modeLen'] = $modeLen;
         $config['minLen'] = $minLen;
@@ -37,7 +47,45 @@ class CodeGen
     }
 
     /**
-     * 生成随机的数字映射,16份
+     * 生成随机的36进制映射
+     * @return array
+     */
+    private function getChrMapping(): array
+    {
+        $strLenArr = [];
+        foreach ($this->getStringArr() as $j) {
+            $strArr = $this->getStringArr();
+            $temp = [];
+            foreach ($strArr as $i) {
+                $key = rand(0, count($strArr) - 1);
+                $temp[$i] = $strArr[$key];
+                unset($strArr[$key]);
+                $strArr = array_values($strArr);
+            }
+            $strLenArr[$j] = $temp;
+        }
+        return $strLenArr;
+    }
+
+    /**
+     * 0 - 9 打乱映射
+     * @param $strArr
+     * @return array
+     */
+    private function secMapping($strArr):array
+    {
+        $temp = [];
+        for ($i = 0; $i <= 9; $i++) {
+            $key = rand(0, count($strArr) - 1);
+            $temp[$i] = $strArr[$key];
+            unset($strArr[$key]);
+            $strArr = array_values($strArr);
+        }
+        return $temp;
+    }
+
+    /**
+     * 生成随机的数字映射
      * @return array
      */
     private function getNumMapping(): array
@@ -45,14 +93,7 @@ class CodeGen
         $strLenArr = [];
         for ($j = 0; $j <= 20; $j++) {
             $strArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-            $temp = [];
-            for ($i = 0; $i <= 9; $i++) {
-                $key = rand(0, count($strArr) - 1);
-                $temp[$i] = $strArr[$key];
-                unset($strArr[$key]);
-                $strArr = array_values($strArr);
-            }
-            $strLenArr[$j] = $temp;
+            $strLenArr[$j] = $this->secMapping($strArr);
         }
         return $strLenArr;
     }
@@ -67,14 +108,7 @@ class CodeGen
         $strLenArr = [];
         for ($j = 0; $j <= 20; $j++) {
             $strArr = $this->getStringArr();
-            $temp = [];
-            for ($i = 0; $i < 26; $i++) {
-                $key = rand(0, count($strArr) - 1);
-                $temp[$i] = $strArr[$key];
-                unset($strArr[$key]);
-                $strArr = array_values($strArr);
-            }
-            $strLenArr[$j] = $temp;
+            $strLenArr[$j] = $this->secMapping($strArr);
         }
         return $strLenArr;
     }

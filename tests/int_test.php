@@ -1,13 +1,17 @@
 <?php
 
+use IdCode\CodeConfig;
 use IdCode\CodeGen;
 use IdCode\CodeService;
 
 require_once __DIR__."/../src/CodeService.php";
 require_once __DIR__."/../src/CodeGen.php";
+require_once __DIR__."/../src/CodeConfig.php";
+require_once __DIR__."/../src/Mode/BaseMode.php";
+require_once __DIR__."/../src/Mode/NumMode.php";
 
 if ( !file_exists('int.config.json') ){
-    file_put_contents('int.config.json',(new CodeGen())->genKey(8,CodeService::numMode));
+    file_put_contents('int.config.json',(new CodeGen())->genKey(8,CodeConfig::numMode));
 }
 
 $code = new CodeService('int.config.json');

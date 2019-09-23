@@ -36,8 +36,12 @@ require_once __DIR__."/../src/CodeService.php";
 require_once __DIR__."/../src/CodeGen.php";
 // 最短长度
 $minLen = 8;
-// 纯数字模式
-$mode   = CodeService::numMode; // numMode | chrModel
+// 数字长度位+纯数字模式
+$mode   = CodeService::numMode;
+// 字符长度位+纯数字模式
+// $mode   = CodeService::chrModel;
+// 无长度位+36进制| 不能设置最短位数,但是能在最短的位数表达更大的数量
+// $mode   = CodeService::notMode;
 
 if ( !file_exists('int.config.json') ){
     file_put_contents('int.config.json',(new CodeGen())->genKey($minLen,$mode));
