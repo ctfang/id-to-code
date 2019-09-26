@@ -49,21 +49,25 @@ class CodeGen
 
     /**
      * 生成随机的36进制映射
-     * @return array
+     * @return array ['长度'=>["尾数"=>[]]]
      */
     private function getChrMapping(): array
     {
         $strLenArr = [];
-        foreach ($this->getStringArr() as $j) {
-            $strArr = $this->getStringArr();
-            $temp = [];
-            foreach ($strArr as $i) {
-                $key = rand(0, count($strArr) - 1);
-                $temp[$i] = $strArr[$key];
-                unset($strArr[$key]);
-                $strArr = array_values($strArr);
+        for ($len=1;$len<11;$len++){
+            $lenArr = [];
+            foreach ($this->getStringArr() as $j) {
+                $strArr = $this->getStringArr();
+                $temp = [];
+                foreach ($strArr as $i) {
+                    $key = rand(0, count($strArr) - 1);
+                    $temp[$i] = $strArr[$key];
+                    unset($strArr[$key]);
+                    $strArr = array_values($strArr);
+                }
+                $lenArr[$j] = $temp;
             }
-            $strLenArr[$j] = $temp;
+            $strLenArr[$len] = $lenArr;
         }
         return $strLenArr;
     }
