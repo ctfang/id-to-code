@@ -153,7 +153,7 @@ class CodeGen
         $string = $this->str;
         $arr = [];
         for ($i = 0; $i < strlen($string); $i++) {
-            $arr[] = $string{$i};
+            $arr[] = $string[$i];
         }
 
         return $arr;

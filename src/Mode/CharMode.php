@@ -21,14 +21,14 @@ class CharMode extends BaseMode
     {
         $end = (int) substr($str, -1);
 
-        $len = $this->strToLen($this->mapToNum($end, 0), ($str{0}));
+        $len = $this->strToLen($this->mapToNum($end, 0), ($str[0]));
 
         $strNum = substr($str, -$len);
 
         $newStr = "";
         $j = $len - 1;
         for ($i = 0; $i < $len; $i++) {
-            $newStr .= $this->mapToNum((int) ($strNum{$i}), $j);
+            $newStr .= $this->mapToNum((int) ($strNum[$i]), $j);
             $j--;
         }
 
@@ -44,7 +44,7 @@ class CharMode extends BaseMode
     {
         $str = (string) $id;
         $len = strlen($str);
-        $end = (int) ($str{$len - 1});
+        $end = (int) ($str[$len - 1]);
 
         $lenStr = $this->lenToStr($len, $end);
         if (($this->modeLen - 1) > 0) {
@@ -63,7 +63,7 @@ class CharMode extends BaseMode
         $newStr = "";
         $j = 0;
         for ($i = ($len - 1); $i >= 0; $i--) {
-            $newStr = $this->numToMap((int) ($str{$i}), $j).$newStr;
+            $newStr = $this->numToMap((int) ($str[$i]), $j).$newStr;
             $j++;
         }
 

@@ -36,13 +36,13 @@ class NotMode extends BaseMode
     public function toInt(string $str): int
     {
         $len = strlen($str);
-        $end = $str{$len - 1};
+        $end = $str[$len - 1];
         $end = $this->mapToNum($end, 1,0);
         $newStr = "";
         $j = 2;
         // 倒序 654321
         for ($i = ($len - 2); $i >= 0; $i--) {
-            $temp = $str{$i};
+            $temp = $str[$i];
             $newStr = $this->mapToNum($temp, $j, $end).$newStr;
             $j++;
         }
@@ -60,13 +60,13 @@ class NotMode extends BaseMode
         $int36 = base_convert($id, 10, 36);
         $int36 = strtoupper($int36);
         $len = strlen($int36);
-        $end = $int36{$len - 1};
+        $end = $int36[$len - 1];
         $newStr = $this->numToMap($end, 1, 0);
 
         $j = 2;
         // 倒序 654321
         for ($i = ($len - 2); $i >= 0; $i--) {
-            $temp = $int36{$i};
+            $temp = $int36[$i];
             $newStr = $this->numToMap($temp, $j, $end).$newStr;
             $j++;
         }
